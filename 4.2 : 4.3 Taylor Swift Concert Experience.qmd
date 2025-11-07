@@ -91,7 +91,8 @@ Then calculate the average enjoyment for that sample:
 
 ```{r}
 stratified_sample_by_row |> 
-  ## YOUR CODE HERE (see lines 58-59 for an example)
+  pull(enjoyment) |> 
+  mean()
 ```
 
 Then package everything into a function that we can run many times. (Nothing will print out yet, we will use this later)
@@ -103,8 +104,8 @@ run_stratified_by_row = function(i) {
     group_by(row) |> 
     sample_n(2)
   stratified_sample_by_row |> 
-    ## YOUR CODE HERE (copy-paste from above)
-}
+    pull(enjoyment) |> 
+    mean()}
 ```
 
 ### Method #3: Stratified random sample by column
@@ -114,7 +115,8 @@ First get your 10 people with a stratified sampling methods, 1 for each column:
 ```{r}
 stratified_sample_by_col =
   enjoyment_data |>
-  ## YOUR CODE HERE (see lines 83-84 for an example)
+  group_by(column) |> 
+  sample_n(1)
 stratified_sample_by_col
 ```
 
@@ -122,7 +124,8 @@ Then calculate the average enjoyment for that sample:
 
 ```{r}
 stratified_sample_by_col |> 
-  ## YOUR CODE HERE (see lines 58-59 for an example)
+    pull(enjoyment) |> 
+    mean()
 ```
 
 Then package everything into a function that we can run many times. (Nothing will print out yet, we will use this later)
@@ -131,10 +134,11 @@ Then package everything into a function that we can run many times. (Nothing wil
 run_stratified_by_col = function(i) {
   stratified_sample_by_col =
     enjoyment_data |>
-    ## YOUR CODE HERE (copy-paste from above)
+    group_by(column) |> 
+    sample_n(1)
   stratified_sample_by_col |> 
-    ## YOUR CODE HERE (copy-paste from above)
-}
+    3pull(enjoyment) |> 
+    mean()}
 ```
 
 ## Step 3: Run the experiments
